@@ -39,6 +39,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+
 
 public class FirstFragment extends Fragment {
 
@@ -50,6 +53,7 @@ public class FirstFragment extends Fragment {
     public Button addEventButton;
     public Button removeEventButton;
     public String selectedDate;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,9 +92,10 @@ public class FirstFragment extends Fragment {
         displayEvents(rootView);
         return rootView;
     }
+
     public void eventDialog() {
 
-        Dialog dialog =  new Dialog(getContext(), R.style.DialogStyle);
+        Dialog dialog = new Dialog(getContext(), R.style.DialogStyle);
         dialog.setContentView(R.layout.add_event_dialog_layout);
 
         Button dialogDateButton = dialog.findViewById(R.id.date_reset_button);
@@ -139,6 +144,8 @@ public class FirstFragment extends Fragment {
             String endTimeText = isAllDay ? "All Day" : endTime;
 
             EventStorage.saveEvent(getContext(), eventName, eventDescription, selectedDate, startTimeText, endTimeText);
+
+
             dialog.dismiss();
             Toast.makeText(getContext(), "Event Saved Successfully!", Toast.LENGTH_SHORT).show();
             displayEvents(getView());
@@ -206,7 +213,7 @@ public class FirstFragment extends Fragment {
                     tableRow.setBackgroundColor(getResources().getColor(R.color.white));
                 }
 
-                tableRow.setPadding(10,10,10,10);
+                tableRow.setPadding(10, 10, 10, 10);
 
                 TextView eventNameTextView = createStyledTextView(eventName, false);
                 TextView eventDescriptionTextView = createStyledTextView(eventDescription, false);
@@ -247,6 +254,7 @@ public class FirstFragment extends Fragment {
 
 
     private AlertDialog removeEventDialog;
+
     private void showRemoveEventDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -272,7 +280,7 @@ public class FirstFragment extends Fragment {
             }
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String> (
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 getContext(),
                 android.R.layout.simple_list_item_2,
                 android.R.id.text1,
@@ -384,42 +392,5 @@ public class FirstFragment extends Fragment {
         ListView listView = removeEventDialog.findViewById(R.id.remove_event_list);
         listView.setAdapter(adapter);
     }
-
-//    private void saveToFile(String data) {
-//        try {
-//
-//            File directory = new File(getContext().getFilesDir(), "events");
-//
-//            if (!directory.exists()) {
-//                directory.mkdirs();
-//            }
-//
-//            FileOutputStream fos = new FileOutputStream(new File(directory, "calendar_data.txt"), true);
-//            fos.write(data.getBytes());
-//            fos.close();
-//            Toast.makeText(getContext(), "Event Saved Successfully!", Toast.LENGTH_SHORT).show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Toast.makeText(getContext(), "Error: Event Not Saved!", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//
-//    private String readFromFile() {
-//
-//        StringBuilder stringBuilder = new StringBuilder();
-//        try {
-//            FileInputStream fis = new FileInputStream(new File(getContext().getFilesDir(), "events/calendar_data.txt"));
-//            int character;
-//            while ((character = fis.read()) != -1) {
-//                stringBuilder.append((char) character);
-//
-//            }
-//            fis.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Toast.makeText(getContext(), "Error: Could not read event file", Toast.LENGTH_SHORT).show();
-//        }
-//            return stringBuilder.toString(); // Return the file content as a String
-//    }
 
 }

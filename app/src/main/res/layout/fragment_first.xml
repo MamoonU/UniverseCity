@@ -12,7 +12,7 @@
         android:layout_height="68dp"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="30dp"
-        android:backgroundTint="#1879D3"
+        android:backgroundTint="#FF0000"
         android:text="Remove Event"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -53,7 +53,7 @@
         android:layout_height="68dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
-        android:backgroundTint="#1879D3"
+        android:backgroundTint="#16CC16"
         android:text="Add Event"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
